@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "id": "wildMagic",
+  "id": "wildmagic",
   "version": "${version}",
 
   "name": "Wild Magic",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "description": "Adds a wild magic enchantment, which has random effects when something is hit by it",
   "authors": [
     "AgentMCB"
   ],
@@ -14,7 +14,7 @@
   },
 
   "license": "CC0-1.0",
-  "icon": "assets/wildMagic/icon.png",
+  "icon": "assets/wildmagic/icon.png",
 
   "environment": "*",
   "entrypoints": {
@@ -23,7 +23,7 @@
     ]
   },
   "mixins": [
-    "wildMagic.mixins.json"
+    "wildmagic.mixins.json"
   ],
 
   "depends": {
