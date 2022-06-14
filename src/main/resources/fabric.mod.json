@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "wildmagic",
   "version": "${version}",
 
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "Wild Magic",
+  "description": "Adds a wild magic enchantment, which has random effects when something is hit by it",
   "authors": [
-    "Me!"
+    "AgentMCB"
   ],
   "contact": {
     "homepage": "https://fabricmc.net/",
@@ -14,16 +14,16 @@
   },
 
   "license": "CC0-1.0",
-  "icon": "assets/modid/icon.png",
+  "icon": "assets/wildmagic/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.fabricmc.example.ExampleMod"
+      "net.fabricmc.example.WildMagic"
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "wildmagic.mixins.json"
   ],
 
   "depends": {
