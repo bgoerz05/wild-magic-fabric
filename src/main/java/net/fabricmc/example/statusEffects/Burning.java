@@ -22,8 +22,9 @@ public class Burning extends StatusEffect {
     public void applyUpdateEffect(LivingEntity entity, int amplifier) {
         BlockPos pos = entity.getBlockPos();
         BlockState state = AbstractFireBlock.getState(entity.world, pos);
-        
-        entity.world.setBlockState(pos, state);
+        if (entity.world.getBlockState(pos).isAir() && state.canPlaceAt(entity.world, pos)) {
+            entity.world.setBlockState(pos, state);
+        }
     }
 
 }

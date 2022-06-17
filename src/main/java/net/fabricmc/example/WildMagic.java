@@ -3,6 +3,7 @@ package net.fabricmc.example;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.example.enchantments.WildMagicCurse;
 import net.fabricmc.example.statusEffects.Burning;
+import net.fabricmc.example.statusEffects.Distorsion;
 import net.fabricmc.example.statusEffects.Sticky;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.effect.StatusEffect;
@@ -22,6 +23,7 @@ public class WildMagic implements ModInitializer {
 
 	public static final StatusEffect BURNING = new Burning();
 	public static final StatusEffect STICKY = new Sticky();
+	public static final StatusEffect DISTORSION = new Distorsion();
 
 	@Override
 	public void onInitialize() {
@@ -30,7 +32,10 @@ public class WildMagic implements ModInitializer {
 		// Proceed with mild caution.
 		Registry.register(Registry.STATUS_EFFECT, new Identifier("wildmagic", "burning"), BURNING);
 		Registry.register(Registry.STATUS_EFFECT, new Identifier("wildmagic", "sticky"), STICKY);
+		Registry.register(Registry.STATUS_EFFECT, new Identifier("wildmagic", "distorsion"), DISTORSION);
+
 		Registry.register(Registry.ENCHANTMENT, new Identifier("wildmagic", "wildmagic"), WILD_MAGIC);
+		
 		LOGGER.info("Hello Fabric world!");
 	}
 }
