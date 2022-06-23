@@ -64,24 +64,26 @@ public class WildMagicCurse extends Enchantment {
         if (user.world instanceof ServerWorld) {
             ServerWorld serverWorld = (ServerWorld) user.world;
             
-            ChickenEntity chicken;
-            FireballEntity fireball;
-            SkeletonHorseEntity skeleHorse;
-            EggEntity egg;
-            AllayEntity allay;
-            LightningEntity bolt;
-            ArrowEntity arrow;
+            ChickenEntity chicken = (ChickenEntity) EntityType.CHICKEN.create(serverWorld);
+            FireballEntity fireball = (FireballEntity) EntityType.FIREBALL.create(serverWorld);
+            SkeletonHorseEntity skeleHorse = (SkeletonHorseEntity) EntityType.SKELETON_HORSE.create(serverWorld);
+            EggEntity egg = (EggEntity) EntityType.EGG.create(serverWorld);
+            AllayEntity allay = (AllayEntity) EntityType.ALLAY.create(serverWorld);
+            LightningEntity bolt = (LightningEntity) EntityType.LIGHTNING_BOLT.create(serverWorld);
+            ArrowEntity arrow = (ArrowEntity) EntityType.ARROW.create(serverWorld);
             List<Entity> targets;
-            CreeperEntity creeper;
-            EvokerEntity evoker;
+            CreeperEntity creeper = (CreeperEntity) EntityType.CREEPER.create(serverWorld);
+            EvokerEntity evoker = (EvokerEntity) EntityType.EVOKER.create(serverWorld);
             Block sculk = Registry.BLOCK.get(new Identifier("minecraft", "sculk"));
+            SculkShriekerBlock shrieker = (SculkShriekerBlock)Registry.BLOCK.get(new Identifier("minecraft", "sculk_shrieker"));
+            SculkSensorBlock sensor = (SculkSensorBlock)Registry.BLOCK.get(new Identifier("minecraft", "sculk_sensor"));
             BlockPos pos;
             BlockPos underPos;
 
             if (isReady) {
 
-                // randomChoice = (int) Math.floor(Math.random()*34);
-                randomChoice = 35;
+                randomChoice = (int) Math.floor(Math.random()*35);
+                // randomChoice = 35;
 
                 switch (randomChoice) {
                     case 0:
@@ -93,26 +95,22 @@ public class WildMagicCurse extends Enchantment {
                         serverWorld.playSound(null, new BlockPos(user.getPos()), SoundEvents.ENTITY_WITHER_DEATH, SoundCategory.HOSTILE, 1.2f, 2f);
                         break;
                     case 2:
-                        chicken = (ChickenEntity) EntityType.CHICKEN.create(serverWorld);
                         chicken.setPos((user.getPos().x + target.getPos().x) / 2, (user.getPos().y + target.getPos().y) / 2 + 1, (user.getPos().z + target.getPos().z) / 2);
                         serverWorld.spawnEntity(chicken);
                         break;
                     case 3:
-                        fireball = (FireballEntity) EntityType.FIREBALL.create(serverWorld);
                         fireball.setPos(user.getPos().x, user.getPos().y + 3, user.getPos().z);
                         fireball.setVelocity(0, -1, 0);
                         serverWorld.spawnEntity(fireball);
                         break;
                     case 4:
                         for(int i = 0; i < 24; i++) {
-                            arrow = (ArrowEntity) EntityType.ARROW.create(serverWorld);
                             arrow.setPos(user.getPos().x, user.getPos().y + 2, user.getPos().z);
                             arrow.setVelocity(Math.random() - 0.5, 0.5, Math.random() - 0.5);
                             serverWorld.spawnEntity(arrow);
                         }
                         break;
                     case 5:
-                        skeleHorse = (SkeletonHorseEntity) EntityType.SKELETON_HORSE.create(serverWorld);
                         skeleHorse.setPos(Math.random() * 4 + user.getPos().x - 2, user.getPos().y + 1, Math.random() * 4 + user.getPos().z - 2);
                         serverWorld.spawnEntity(skeleHorse);
                         break;
@@ -124,7 +122,6 @@ public class WildMagicCurse extends Enchantment {
                         break;
                     case 8:
                         for(int i = 0; i < 24; i++) {
-                            egg = (EggEntity) EntityType.EGG.create(serverWorld);
                             egg.setPos(user.getPos().x, user.getPos().y + 3, user.getPos().z);
                             egg.setVelocity(Math.random() / 2 - 0.25, 0.5, Math.random() / 2 - 0.25);
                             serverWorld.spawnEntity(egg);
@@ -136,7 +133,6 @@ public class WildMagicCurse extends Enchantment {
                     case 10:
                         user.teleport(user.getPos().x, user.getPos().y + 1.5, user.getPos().z);
                         user.setVelocity(user.getVelocity().x, 0.5, user.getVelocity().z);
-                        SculkShriekerBlock shrieker = (SculkShriekerBlock)Registry.BLOCK.get(new Identifier("minecraft", "sculk_shrieker"));
                         pos = new BlockPos(user.getPos().x, user.getPos().y - 1.5, user.getPos().z);
                         underPos = new BlockPos(user.getPos().x, user.getPos().y - 2.5, user.getPos().z);
                         serverWorld.setBlockState(pos, shrieker.getDefaultState().with(SculkShriekerBlock.CAN_SUMMON, true));
@@ -163,7 +159,6 @@ public class WildMagicCurse extends Enchantment {
                         break;
                     case 17:
                         for(int i = 0; i < Math.floor(Math.random() * 10 + 1); i++) {
-                            allay = (AllayEntity) EntityType.ALLAY.create(serverWorld);
                             allay.setPos(Math.random() * 4 + user.getPos().x - 2, user.getPos().y + 1, Math.random() * 4 + user.getPos().z - 2);
                             serverWorld.spawnEntity(allay);
                         }
@@ -187,7 +182,6 @@ public class WildMagicCurse extends Enchantment {
                         break;
                     case 23:
                         for(int i = 0; i < 3; i++) {
-                            bolt = (LightningEntity) EntityType.LIGHTNING_BOLT.create(serverWorld);
                             bolt.setPos(Math.random() * 12 + user.getPos().x - 6, user.getPos().y + 1, Math.random() * 12 + user.getPos().z - 6);
                             serverWorld.spawnEntity(bolt);
                         }
@@ -242,21 +236,17 @@ public class WildMagicCurse extends Enchantment {
                         break;
                     case 32:
                         for(int i = 0; i < 4; i++) {
-                            creeper = (CreeperEntity) EntityType.CREEPER.create(serverWorld);
-                            double posX = Math.random() * 12 + user.getPos().x - 6;
-                            double posY = user.getPos().y + 1;
-                            double posZ = Math.random() * 12 + user.getPos().z - 6;
-                            creeper.setPos(posX, posY, posZ);
+                            pos = new BlockPos(Math.random() * 12 + user.getPos().x - 6, user.getPos().y + 1, Math.random() * 12 + user.getPos().z - 6);
+                            creeper.setPos(pos.getX(), pos.getY(), pos.getZ());
                             serverWorld.spawnEntity(creeper);
                             if(Math.random() < 0.25) {
                                 bolt = (LightningEntity) EntityType.LIGHTNING_BOLT.create(serverWorld);
-                                bolt.setPos(posX, posY, posZ);
+                                bolt.setPos(pos.getX(), pos.getY(), pos.getZ());
                                 serverWorld.spawnEntity(bolt);
                             }
                         }
                         break;
                     case 33:
-                        evoker = (EvokerEntity) EntityType.EVOKER.create(serverWorld);
                         evoker.setPos(Math.random() * 4 + user.getPos().x - 2, user.getPos().y + 1, Math.random() * 4 + user.getPos().z - 2);
                         serverWorld.spawnEntity(evoker);
                         break;
@@ -266,7 +256,6 @@ public class WildMagicCurse extends Enchantment {
                     case 35:
                         user.teleport(user.getPos().x, user.getPos().y + 1, user.getPos().z);
                         user.setVelocity(user.getVelocity().x, 0.5, user.getVelocity().z);
-                        SculkSensorBlock sensor = (SculkSensorBlock)Registry.BLOCK.get(new Identifier("minecraft", "sculk_sensor"));
                         pos = new BlockPos(user.getPos().x, user.getPos().y - 1, user.getPos().z);
                         underPos = new BlockPos(user.getPos().x, user.getPos().y - 2, user.getPos().z);
                         serverWorld.setBlockState(pos, sensor.getDefaultState());
